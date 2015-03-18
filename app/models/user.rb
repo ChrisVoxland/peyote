@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
         password: Devise.friendly_token[0,20],
         provider: access_token.provider,
         uid: access_token.uid,
-        token:  access_token.credentials.token,
+        access_token:  access_token.credentials.token,
         refresh_token: access_token.credentials.refresh_token
         
       )
@@ -34,13 +34,16 @@ end
 #   'start' => { 'dateTime' => (DateTime.now + 1.day).rfc3339 },
 #   'end' => { 'dateTime' => (DateTime.now + 1.day + 1.hour).rfc3339 },
 #   'attendees' => [ { "email" => 'bob@example.com' },
-#   { "email" =>'sally@example.com' } ] }
+#   { "email" =>'sally@example.com' } ] 
+# }
 
-# client = Google::APIClient.new
-# client.authorization.access_token = current_user.token
-# service = client.discovered_api('calendar', 'v3')
+# # client = Google::APIClient.new
+# # client.authorization.access_token = current_user.token
+# # service = client.discovered_api('calendar', 'v3')
 
-# @set_event = client.execute(:api_method => service.events.insert,
-#                       :parameters => {'calendarId' => current_user.email, 'sendNotifications' => false},
-#                       :body => JSON.dump(@event),
-#                       :headers => {'Content-Type' => 'application/json'})
+# @set_event = client.execute(
+#   :api_method => service.events.insert,
+#   :parameters => 
+#     {'calendarId' => current_user.email, 'sendNotifications' => false},
+#   :body => JSON.dump(@event),
+#   :headers => {'Content-Type' => 'application/json'})
