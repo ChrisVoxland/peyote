@@ -1,3 +1,10 @@
 YOU ARE HOME MOTHER FUCKER
 
-
+<%= form_for :event, remote: true, action: :post, url: events_path do |f| %>
+  summary: <%= f.text_field :summary %><br />
+  description: <%= f.text_area :description %><br />
+  location: <%= f.text_field :location %><br />
+  start: <%= f.date_select :start %><br />
+  end: <%= f.date_select :end %><br />
+  <%= f.submit %>
+<% end %>

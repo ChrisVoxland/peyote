@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   get 'omniauth_callbacks_controller/google_oath2'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+
+  resources :events, :only => [:create]
 end
