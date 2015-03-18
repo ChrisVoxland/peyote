@@ -15,22 +15,23 @@ class Event < ActiveRecord::Base
         "calendarId" => user.email,
         "sendNotifications" => false
       },
-      :body => jsonify
+      :body => jsonify,
+      :headers => {'Content-Type' => 'application/json'}
       )
   end
 
-  #TODO: BLEGHGHGHGH SERIALIZER
+  #TODO: BLEGHGHGHGH 
   def jsonify
     json_structure = {
       'summary' => summary,
       'description' => description,
       'location' => location,
-      'start' => { 'dateTime' => (start_time + 3.hours).to_datetime.rfc3339 },
-      'end' => { 'dateTime' => (end_time + 3.hours).to_datetime.rfc3339 },
+      'start' => { 'dateTime' => start_time.to_datetime.rfc3339 },
+      'end' => { 'dateTime' => end_time.to_datetime.rfc3339 },
       'attendees' => [ 
         { "email" => 'bob@example.com' },
-        { "email" =>'sally@example.com' } 
-      ]      
+        { "email" =>'sally@example.com' }
+      ]   
     }
     JSON.dump(json_structure)
   end

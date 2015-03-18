@@ -25,25 +25,3 @@ class User < ActiveRecord::Base
     user
   end
 end
-
-# current_user = User.last
-# @event = {
-#   'summary' => 'New Event Title',
-#   'description' => 'The description',
-#   'location' => 'Location',
-#   'start' => { 'dateTime' => (DateTime.now + 1.day).rfc3339 },
-#   'end' => { 'dateTime' => (DateTime.now + 1.day + 1.hour).rfc3339 },
-#   'attendees' => [ { "email" => 'bob@example.com' },
-#   { "email" =>'sally@example.com' } ] 
-# }
-
-# # client = Google::APIClient.new
-# # client.authorization.access_token = current_user.token
-# # service = client.discovered_api('calendar', 'v3')
-
-# @set_event = client.execute(
-#   :api_method => service.events.insert,
-#   :parameters => 
-#     {'calendarId' => current_user.email, 'sendNotifications' => false},
-#   :body => JSON.dump(@event),
-#   :headers => {'Content-Type' => 'application/json'})
