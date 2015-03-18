@@ -1,10 +1,27 @@
-YOU ARE HOME MOTHER FUCKER
-
-<%= form_for :event, remote: true, action: :post, url: events_path do |f| %>
-  summary: <%= f.text_field :summary %><br />
-  description: <%= f.text_area :description %><br />
-  location: <%= f.text_field :location %><br />
-  start: <%= f.date_select :start_time %><br />
-  end: <%= f.date_select :end_time %><br />
-  <%= f.submit %>
-<% end %>
+<div class="page-home container">
+  <%= form_for :event, remote: true, action: :post, url: events_path do |f|%>
+    <div class="input-group">
+      <div class="form-label">Summary:</div>
+      <%= f.text_field :summary, :class => "form-control" %>
+    </div>
+    <div class="input-group">
+      <div class="form-label">Description:</div>
+      <%= f.text_area :description, :class => "form-control" %>
+    </div>
+    <div class="input-group">
+      <div class="form-label">Location:</div>
+      <%= f.text_field :location, :class => "form-control" %>
+    </div>
+    <div class="input-group">
+      <div class="form-label">Start time:</div>
+      <%= f.date_select :start_time, :class => "form-control" %>
+    </div>
+    <div class="input-group">
+      <div class="form-label">End time:</div>
+      <%= f.date_select :end_time, :class => "form-control" %>
+    </div>
+    <div class="input-group">
+      <%= f.submit :class => "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

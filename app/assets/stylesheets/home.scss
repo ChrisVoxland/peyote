@@ -2,17 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  font-family: $font;
-  background-color: $bg;
-}
+.page-home {
+  form {
 
-.btn-primary {
-  background-color: $primary-color;
-  border: none;
-  border-radius: $radius;
-
-  &:hover {
-    background-color: darken($primary-color, 10%);
   }
 }
