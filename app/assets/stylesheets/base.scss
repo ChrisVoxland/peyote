@@ -1,0 +1,22 @@
+body {
+  font-family: $font;
+  background-color: $bg;
+}
+
+.btn-primary {
+  background-color: $primary-color;
+  border: none;
+  border-radius: $radius;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+.input-group {
+  margin-bottom: $buffer;
+}
+
+.input-group, input, textarea {
+  width: 100%;
+}
