@@ -6,21 +6,7 @@ require 'google/api_client'
 class Event < ActiveRecord::Base
   belongs_to :user
 
-  def create_event_for_user(user)
-    client.authorization.access_token = user.access_token
-    service = client.discovered_api('calendar', 'v3')
-    new_event = client.execute(
-      api_method: service.events.insert,
-      parameters: {
-        "calendarId" => user.email,
-        "sendNotifications" => false
-      },
-      :body => jsonify,
-      :headers => {'Content-Type' => 'application/json'}
-      )
-  end
-
-  #TODO: BLEGHGHGHGH 
+  #TODO: BLEGHGHGHGH make this a serializer
   def jsonify
     json_structure = {
       'summary' => summary,
@@ -34,15 +20,5 @@ class Event < ActiveRecord::Base
       ]   
     }
     JSON.dump(json_structure)
-  end
-
-  private
-
-  #TODO: Move this hit out into a separate class
-  def client
-    @client ||= Google::APIClient.new(
-      application_name: "calendoer",
-      application_version: "0.0.1"
-    )
   end
 end
