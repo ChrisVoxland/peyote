@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318011155) do
+ActiveRecord::Schema.define(version: 20150319022836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,18 @@ ActiveRecord::Schema.define(version: 20150318011155) do
 
   add_index "auth_tokens", ["user_id"], name: "index_auth_tokens_on_user_id", using: :btree
 
+  create_table "calendars", force: :cascade do |t|
+    t.string   "calendar_id"
+    t.string   "summary"
+    t.string   "access_role"
+    t.boolean  "primary"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "calendars", ["user_id"], name: "index_calendars_on_user_id", using: :btree
+
   create_table "events", force: :cascade do |t|
     t.string   "summary"
     t.string   "description"
@@ -36,8 +48,10 @@ ActiveRecord::Schema.define(version: 20150318011155) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "calendar_id"
   end
 
+  add_index "events", ["calendar_id"], name: "index_events_on_calendar_id", using: :btree
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -57,11 +71,14 @@ ActiveRecord::Schema.define(version: 20150318011155) do
     t.string   "uid"
     t.string   "access_token"
     t.string   "refresh_token"
+    t.datetime "expires_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "auth_tokens", "users"
+  add_foreign_key "calendars", "users"
+  add_foreign_key "events", "calendars"
   add_foreign_key "events", "users"
 end

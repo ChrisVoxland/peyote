@@ -1,10 +1,8 @@
-require 'google/api_client'
-
-#TODO: extract api stuff
 #TODO: save status on event? or event log sort of thing?
 
 class Event < ActiveRecord::Base
   belongs_to :user
+  belongs_to :calendar
 
   #TODO: BLEGHGHGHGH make this a serializer
   def jsonify
