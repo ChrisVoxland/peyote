@@ -33,6 +33,7 @@ class Google::Calendar
     JSON.parse(response.body)
   end
 
+  # TODO: dont pull all future events, limit scope
   def get_future_events_from_calendar(calendar)
     response = client.execute(
       api_method: calendar_api.events.list,
