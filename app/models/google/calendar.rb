@@ -17,8 +17,32 @@ class Google::Calendar
         "sendNotifications" => false
       },
       :body => event.jsonify,
-      :headers => {'Content-Type' => 'application/json'}
+      headers: {'Content-Type' => 'application/json'}
     )
+  end
+
+  def get_event_from_calendar(calendar, event)
+    response = client.execute(
+      api_method: calendar_api.events.get,
+      parameters: {
+        "calendarId" => calendar.calendar_id,
+        "eventId" => event.event_id
+      },
+      headers: {'Content-Type' => 'application/json'}
+    )
+    JSON.parse(response.body)
+  end
+
+  def get_future_events_from_calendar(calendar)
+    response = client.execute(
+      api_method: calendar_api.events.list,
+      parameters: {
+        "calendarId" => calendar.calendar_id,
+        "timeMin" => DateTime.now.rfc3339
+      },
+      headers: {'Content-Type' => 'application/json'}
+    )
+    JSON.parse(response.body)["items"]
   end
 
   def get_writeable_calendars
@@ -27,7 +51,7 @@ class Google::Calendar
       parameters: {
         "minAccessRole" => "writer"
       },
-      :headers => {'Content-Type' => 'application/json'}
+      headers: {'Content-Type' => 'application/json'}
     )
     JSON.parse(response.body)["items"]
   end

@@ -33,16 +33,17 @@ class User < ActiveRecord::Base
     user
   end
 
+  #TODO Why is calendar shit on user? Expedience!
   def fetch_writeable_calendars
     calendars = Google::Calendar.new(self).get_writeable_calendars
     calendars.each do |calendar|
-      find_or_update_calendar(calendar)
+      update_or_create_calendar(calendar)
     end
   end
 
   private
 
-  def find_or_update_calendar(calendar)
+  def update_or_create_calendar(calendar)
     calendar_attributes = {
         calendar_id: calendar["id"],
         summary: calendar["summary"],
