@@ -9,5 +9,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
-  resources :events, :only => [:create]
+  resources :events, only: [:create]
+  resource :schedule, only: [:create]
+  resources :activities, only: [:create]
 end

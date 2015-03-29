@@ -6,13 +6,13 @@ class Calendar < ActiveRecord::Base
     api = Google::Calendar.new(user)
     events = api.get_future_events_from_calendar(self)
     events.each do |event|
-      update_or_create_event(event)
+      update_or_create_local_event(event)
     end
   end
 
   private
 
-  def update_or_create_event(event)
+  def update_or_create_local_event(event)
     event_attributes = {
       event_id: event["id"],
       summary: event["summary"],

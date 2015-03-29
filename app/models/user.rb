@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :events
   #TODO: Maybe rename to google_calendars. naming is weird..
   has_many :calendars
+  has_many :activities
+  has_one :schedule
 
   #TODO: Pull tokens into separate class so user's aren't stuck with only one oath source
 

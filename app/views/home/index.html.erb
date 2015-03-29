@@ -1,8 +1,9 @@
 <div class="page-home container">
-  <%= form_for :event, remote: true, action: :post, url: events_path do |f|%>
+  <h2>WTF you want to do?</h3>
+  <%= form_for :activity, remote: true, action: :post, url: activities_path do |f|%>
     <div class="input-group">
       <div class="form-label">Summary:</div>
-      <%= f.text_field :summary, :class => "form-control" %>
+      <%= f.text_field :display_name, :class => "form-control" %>
     </div>
     <div class="input-group">
       <div class="form-label">Description:</div>
@@ -13,12 +14,45 @@
       <%= f.text_field :location, :class => "form-control" %>
     </div>
     <div class="input-group">
+      <div class="form-label">Time to spend doing activity (in minutes):</div>
+      <%= f.number_field :time_to_spend, :class => "form-control", value: 60 %>
+    </div>
+    <div class="input-group">
+      <div class="form-label">How many times a week to do activity:</div>
+      <%= f.number_field :frequency_per_week, :class => "form-control", value: 2 %>
+    </div>
+    <div class="input-group">
+      <%= f.submit :class => "btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <h2>Shit you already watnt do do!!</h2>
+  <ul>
+    <% @activities.each do |activity| %>
+      <li>display name: <%= activity.display_name %></li>
+    <% end %>
+  </ul>
+  <br/>
+
+  <%= form_for :schedule, remote: true, action: :post, url: schedule_path do |f| %>
+    <h2>Wus yo schedu bro?</h2>
+    <h3>Weekend Availablilty</h3>
+    <div class="input-group">
       <div class="form-label">Start time:</div>
-      <%= f.date_select :start_time, :class => "form-control" %>
+      <%= f.time_select :weekend_start_time, :class => "form-control" %>
     </div>
     <div class="input-group">
       <div class="form-label">End time:</div>
-      <%= f.date_select :end_time, :class => "form-control" %>
+      <%= f.time_select :weekend_end_time, :class => "form-control" %>
+    </div>
+    <h3>Weekday Availablilty</h3>
+    <div class="input-group">
+      <div class="form-label">Start time:</div>
+      <%= f.time_select :weekday_start_time, :class => "form-control" %>
+    </div>
+    <div class="input-group">
+      <div class="form-label">End time:</div>
+      <%= f.time_select :weekday_end_time, :class => "form-control" %>
     </div>
     <div class="input-group">
       <%= f.submit :class => "btn btn-primary" %>
