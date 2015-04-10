@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe OmniauthCallbacksControllerController, type: :controller do
+RSpec.describe OmniauthCallbacksController, type: :controller do
 
   describe "GET #google_oath2" do
     it "returns http success" do

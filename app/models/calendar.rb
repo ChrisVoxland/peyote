@@ -2,6 +2,7 @@ class Calendar < ActiveRecord::Base
   belongs_to :user
   has_many :events
 
+  #TODO think about timezones
   def fetch_events
     api = Google::Calendar.new(user)
     events = api.get_future_events_from_calendar(self)
