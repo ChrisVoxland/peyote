@@ -41,10 +41,9 @@ class EarliestAvailableTimeslotForDateFinder
       next_event = events_ending_during_users_desired_time[index + 1]
       if next_event && sufficient_time_between_events?(event, next_event)
         return { start_time: event.end_time, end_time: event.end_time + @minutes_required.minutes }
-      else
-        return {}
       end
     end
+    {}
   end
 
   def events_ending_during_users_desired_time

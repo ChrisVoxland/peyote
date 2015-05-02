@@ -30,7 +30,7 @@ describe EarliestAvailableTimeslotForDateFinder do
       describe "finding time slots when there are events on a day" do
 
         context "when there are multiple events and enough time between them for the new event" do
-          let!(:event_2) do
+          let!(:event_1) do
             create(
               :event,
               user: user,
